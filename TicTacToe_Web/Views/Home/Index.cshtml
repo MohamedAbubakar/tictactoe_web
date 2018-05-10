@@ -1,0 +1,67 @@
+﻿@model TicTacToe_Web.Models.ResultViewModel
+
+<p style="color: red; padding-top: 20px">Score X:  <strong>@Model.ScoreUser1</strong></p> 
+<p style="color: blue">Score O: <strong>@Model.ScoreUser2</strong></p>
+
+<table>
+    <tr>
+        <td>@GetResult(11)</td>
+        <td>@GetResult(12)</td>
+        <td>@GetResult(13)</td>
+    </tr>
+    <tr>
+        <td>@GetResult(21)</td>
+        <td>@GetResult(22)</td>
+        <td>@GetResult(23)</td>
+    </tr>
+    <tr>
+        <td>@GetResult(31)</td>
+        <td>@GetResult(32)</td>
+        <td>@GetResult(33)</td>
+    </tr>
+</table>
+
+@helper GetResult(int value)
+    {
+        if (Model.SelectedValuesUser1 != null && Model.SelectedValuesUser1.Contains(value))
+        {
+            <span class="userValue" style="color:red">X</span>
+        }
+        else if (Model.SelectedValuesUser1 != null && Model.SelectedValuesUser2.Contains(value))
+        {
+            <span class="userValue"  style="color:blue">O</span>
+        }
+        else
+        {
+            <button onclick="SetValue(@value)"></button>
+        }
+}
+
+@section scripts
+{
+    <script>
+        function SetValue(val) {
+            window.location = "/home/index?value=" + val;
+        }
+    </script>
+}
+
+<style>
+    tr {
+        height: 47px !important;
+    }
+     td {
+         font-size: 21px;
+         text-align: center;
+         border: solid 1px gray;
+         width: 47px !important;
+     }
+
+    td > button {
+        padding: 20px;
+    }
+
+    .userValue {
+        padding: 0 12px;
+    }
+</style>
